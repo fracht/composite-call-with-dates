@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "experimentalDecorators": true,
+    "plugins": [
+      {
+        "transform": "./dist/transformer.js",
+        "cacheBetweenTests": false
+      }
+    ]
+  },
+  "include": ["tests", "src"],
+  "exclude": ["node_modules", "example"]
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "input": "./src/index.ts",
+    "name": "composite-call",
+    "buildOptions": {
+      "target": "es2015"
+    }
+  },
+  {
+    "input": "./src/transformer.ts",
+    "format": "cjs",
+    "cjsMode": "development",
+    "outfile": "./dist/transformer.js",
+    "buildOptions": {
+      "platform": "node",
+      "target": "node10.23.3"
+    }
+  }
+]

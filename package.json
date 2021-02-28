@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "description": "Package which makes ts-transformer-dates and composite-call packages work well together",
   "main": "./dist/index.js",
-  "module": "./dist/composite-call-with-dates.esm.js",
+  "module": "./dist/composite-call.esm.js",
   "files": [
     "dist"
   ],
   "size-limit": [
     {
-      "path": "dist/composite-call-with-dates.cjs.production.min.js",
+      "path": "dist/composite-call.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/composite-call-with-dates.esm.js",
+      "path": "dist/composite-call.esm.js",
       "limit": "10 KB"
     }
   ],
@@ -56,7 +56,12 @@
     "lint-staged": "^10.5.4",
     "np": "^7.4.0",
     "size-limit": "^4.9.2",
+    "ttypescript": "^1.5.12",
     "typescript": "^4.2.2"
   },
-  "types": "./dist/composite-call-with-dates.d.ts"
+  "types": "./dist/composite-call.d.ts",
+  "dependencies": {
+    "composite-call": "^0.2.0",
+    "ts-transformer-dates": "^1.1.0"
+  }
 }
