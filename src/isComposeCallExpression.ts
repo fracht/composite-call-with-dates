@@ -28,7 +28,6 @@ export function isComposeCallExpression(
   }
 
   try {
-    console.log(declaration.getSourceFile().fileName);
     return (
       require.resolve(declaration.getSourceFile().fileName) ===
       config.declarationsPath

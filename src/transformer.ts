@@ -1,3 +1,4 @@
+import { visitNodeAndChildren } from 'composite-call/dist/transformer-utils';
 import {
   createPrinter,
   Program,
@@ -7,7 +8,6 @@ import {
 } from 'typescript';
 
 import { config } from './config';
-import { visitNodeAndChildren } from 'composite-call/dist/transformer-utils';
 import { visitor } from './visitor';
 
 function transformer(program: Program): TransformerFactory<SourceFile> {
@@ -27,7 +27,6 @@ function transformer(program: Program): TransformerFactory<SourceFile> {
       visitor,
       config,
     );
-    console.log(createPrinter().printFile(transformedFile));
     return transformedFile;
   };
 }

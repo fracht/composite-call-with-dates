@@ -1,8 +1,8 @@
 import {
   AnyFunction,
+  compose as normalCompose,
   CompositeCall,
   NormalTypeToPathType,
-  compose as normalCompose,
 } from 'composite-call';
 
 export function compose<T extends AnyFunction>(

@@ -1,12 +1,11 @@
-import { Node, Program, TransformationContext } from 'typescript';
-
-import type { TransformerConfig } from './config';
 import {
   createComposeCallExpression,
   getComposedFunctionData,
   isComposeImportExpression,
 } from 'composite-call/dist/transformer-utils';
+import { Node, Program, TransformationContext } from 'typescript';
 
+import type { TransformerConfig } from './config';
 import { isComposeCallExpression } from './isComposeCallExpression';
 import type { Identifiers } from './typings';
 
