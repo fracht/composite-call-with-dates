@@ -1,6 +1,5 @@
 import { visitNodeAndChildren } from 'composite-call/dist/transformer-utils';
 import {
-  createPrinter,
   Program,
   SourceFile,
   TransformationContext,
