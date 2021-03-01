@@ -7,6 +7,14 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "composite-call",
+    "typescript",
+    "dates",
+    "json",
+    "api",
+    "request"
+  ],
   "size-limit": [
     {
       "path": "dist/composite-call.cjs.production.min.js",
