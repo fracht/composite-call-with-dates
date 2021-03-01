@@ -1,13 +1,16 @@
 import {
-  createComposeCallExpression,
   getComposedFunctionData,
   isComposeImportExpression,
 } from 'composite-call/dist/transformer-utils';
 import { Node, Program, TransformationContext } from 'typescript';
 
 import type { TransformerConfig } from './config';
+import { convertDates } from './convertDates';
+import { createComposeCallExpression } from './createComposeCallExpression';
+import { getReturnType } from './getReturnType';
 import { isComposeCallExpression } from './isComposeCallExpression';
 import type { Identifiers } from './typings';
+import { unboxPromise } from './unboxPromise';
 
 export const visitor = (
   node: Node,
@@ -46,12 +49,26 @@ export const visitor = (
   const [fun, ...otherArguments] = node.arguments;
 
   const composedFunctionData = getComposedFunctionData(fun, typeChecker);
+  const returnType = getReturnType(fun, typeChecker);
+
+  const dates = context.factory.createArrayLiteralExpression(
+    returnType
+      ? convertDates(
+          unboxPromise(returnType, typeChecker),
+          typeChecker,
+          context.factory,
+          [],
+          node,
+        )
+      : [],
+  );
 
   if (composedFunctionData) {
     return createComposeCallExpression(
       composedFunctionData,
       identifiers,
       fun,
+      dates,
       otherArguments,
       context,
     );
