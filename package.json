@@ -61,7 +61,7 @@
   },
   "types": "./dist/composite-call.d.ts",
   "dependencies": {
-    "composite-call": "^0.2.0",
+    "composite-call": "^0.2.1",
     "ts-transformer-dates": "^1.1.0"
   }
 }

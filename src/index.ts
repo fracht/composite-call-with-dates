@@ -33,15 +33,15 @@ export function compose<T extends AnyFunction>(
       fun as T,
       (restArgs as unknown) as NormalTypeToPathType<Parameters<T>>,
       names as string[],
-      datePaths,
-      paths as ToDatesConverter,
+      [datePaths],
+      [paths as ToDatesConverter],
     );
   } else {
     return new CompositeCall<T, [T]>(
       fun as T,
       (args as unknown) as NormalTypeToPathType<Parameters<T>>,
       names as string[],
-      paths as string[][],
+      [paths as string[][]],
     );
   }
 }
