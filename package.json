@@ -1,6 +1,6 @@
 {
   "name": "composite-call-with-dates",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Package which makes ts-transformer-dates and composite-call packages work well together",
   "main": "./dist/index.js",
   "module": "./dist/composite-call.esm.js",
