@@ -1,5 +1,7 @@
 import { AnyFunction, NormalTypeToPathType } from 'composite-call';
 
+export * from 'composite-call';
+
 import { CompositeCall } from './CompositeCall';
 import { ToDatesConverter } from './typings';
 
