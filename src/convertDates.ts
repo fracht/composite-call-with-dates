@@ -1,6 +1,5 @@
 import {
   ArrayLiteralExpression,
-  isArrayTypeNode,
   Node,
   NodeFactory,
   PropertyDeclaration,
@@ -28,37 +27,26 @@ export const convertDates = (
     );
     return typeChecker.getTypeFromTypeNode(propertyType).getNonNullableType();
   };
-  const isInterfaceOrArray = (property: Symbol): boolean => {
-    const propertyType = (property.valueDeclaration as PropertyDeclaration)
-      ?.type as TypeNode;
-    return (
-      typeChecker.getTypeFromTypeNode(propertyType).isClassOrInterface() ||
-      isArrayTypeNode(propertyType)
-    );
-  };
-  return properties
-    .filter((property) => {
-      if (isInterfaceOrArray(property)) return true;
-      return getTypeOfProperty(property)?.getSymbol()?.getName() === 'Date';
-    })
-    .reduce((props, property) => {
-      if (isInterfaceOrArray(property)) {
-        const propertyType = getTypeOfProperty(property);
-        if (propertyType.getSymbol()?.getName() !== 'Date')
-          return props.concat(
-            convertDates(
-              propertyType,
-              typeChecker,
-              factory,
-              prefix.concat(factory.createStringLiteral(property.getName())),
-              node,
-            ),
-          );
-      }
+  return properties.reduce((props, property) => {
+    const propertyType = getTypeOfProperty(property);
+    if (typeChecker.typeToString(propertyType) === 'Date') {
       return props.concat(
         factory.createArrayLiteralExpression(
           prefix.concat([factory.createStringLiteral(property.getName())]),
         ),
       );
-    }, [] as ArrayLiteralExpression[]);
+    }
+    if (propertyType.isClassOrInterface()) {
+      return props.concat(
+        convertDates(
+          propertyType,
+          typeChecker,
+          factory,
+          prefix.concat(factory.createStringLiteral(property.getName())),
+          node,
+        ),
+      );
+    }
+    return props;
+  }, [] as ArrayLiteralExpression[]);
 };
