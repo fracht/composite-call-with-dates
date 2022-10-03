@@ -19,24 +19,24 @@ export function compose<T extends AnyFunction>(
 export function compose<T extends AnyFunction>(
   names: string[],
   fun: T,
-  paths: string[][] | ToDatesConverter,
+  paths: string[][],
   ...args: NormalTypeToPathType<Parameters<T>>
 ): CompositeCall<T, [T]>;
 
 export function compose<T extends AnyFunction>(
   names: string[] | T,
   fun: T | unknown,
-  paths: string[][] | ToDatesConverter | unknown,
+  paths: string[][] | unknown,
   ...args: NormalTypeToPathType<Parameters<T>>
 ) {
-  if (typeof paths === 'function') {
-    const [datePaths, ...restArgs] = args;
+  if (typeof args[0] === 'function') {
+    const [converter, ...restArgs] = args;
     return new CompositeCall<T, [T]>(
       fun as T,
       (restArgs as unknown) as NormalTypeToPathType<Parameters<T>>,
       names as string[],
-      [datePaths],
-      [paths as ToDatesConverter],
+      [paths as string[][]],
+      [converter as ToDatesConverter],
     );
   } else {
     return new CompositeCall<T, [T]>(
